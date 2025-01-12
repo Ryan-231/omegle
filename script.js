@@ -15,6 +15,7 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
     // Display local video stream
     playLocalButton.addEventListener('click', ()=>{
       localVideo.srcObject = stream;
+      localVideo.muted = true;
       localVideo.play();
     });
 
@@ -36,6 +37,7 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
     peer.on('stream', remoteStream => {
       playRemoteButton.addEventListener('click', ()=>{
         remoteVideo.srcObject = remoteStream;
+        remoteVideo.muted = true;
         remoteVideo.play();
       })
     });
