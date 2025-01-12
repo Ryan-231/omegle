@@ -13,8 +13,11 @@ let peer;
 navigator.mediaDevices.getUserMedia({ video: true, audio: true })
   .then(stream => {
     // Display local video stream
-    localVideo.srcObject = stream;
-    localVideo.play();
+    playLocalButton.addEventListener('click', ()=>{
+      localVideo.srcObject = stream;
+      localVideo.play();
+    });
+
 
     // Initialize SimplePeer instance
     peer = new SimplePeer({ initiator: location.hash === '#1', trickle: false, stream });
@@ -31,8 +34,10 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
 
     // Display remote stream
     peer.on('stream', remoteStream => {
-      remoteVideo.srcObject = remoteStream;
-      remoteVideo.play();
+      playRemoteButton.addEventListener('click', ()=>{
+        remoteVideo.srcObject = remoteStream;
+        remoteVideo.play();
+      })
     });
   })
   .catch(err => console.error('Error accessing media devices:', err));
